@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: python-exporter-deployment
-  namespace: test
+  name: workshop-app
+  namespace: <ns>
   labels:
-    app: python-exporter
+    app: workshop-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: python-exporter
+      app: workshop-app
   template:
     metadata:
       labels:
-        app: python-exporter
+        app: workshop-app
         prometheus.io/scrape: 'true'
         prometheus.io/port: '8000'
     spec:
       containers:
-      - name: python-exporter
-        image: harbor-harbor.apps.cluster-tkbfg.dynamic.redhatworkshops.io/workshop/my-webapp:latest
+      - name: workshop-app
+        image: harbor-harbor.apps.cluster-tkbfg.dynamic.redhatworkshops.io/workshop/<username>-my-app:v1
         ports:
         - containerPort: 8000
         resources:
