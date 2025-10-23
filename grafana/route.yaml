@@ -1,0 +1,16 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: grafana-<username>
+  namespace: <ns>
+spec:
+  host: <username>.apps.cluster-tkbfg.dynamic.redhatworkshops.io
+  path: /
+  to:
+    kind: Service
+    name: my-grafana-<username>
+    weight: 100
+  port:
+    targetPort: service
+  tls:
+    termination: edge

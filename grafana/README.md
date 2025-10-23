@@ -5,7 +5,7 @@
 1. Examine grafana values in garfana-values.yaml file and change the password of the admin username under .adminPassword
 
 ```
-cd grafana
+cd grafana/chart
 vim grafana-values.yaml
 ```
    
