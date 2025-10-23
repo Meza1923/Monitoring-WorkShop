@@ -37,10 +37,10 @@ cat service.yaml
 kind: Service
 apiVersion: v1
 metadata:
-  name: metrics-workshop
+  name: workshop-app
   namespace: <ns>
   labels:
-    app: metrics-workshop <-- # should be match
+    app: workshop-app-svc <-- should match 
 spec:
   ports:
     - name: http
@@ -49,7 +49,7 @@ spec:
       targetPort: 8000
   type: ClusterIP
   selector:
-    app: python-exporter
+    app: workshop-app
 
 
 cat servicemonitor.yaml
@@ -57,12 +57,12 @@ cat servicemonitor.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: metric-workshop
+  name: workshop-app
   namespace: <ns>
 spec:
   selector:
     matchLabels:
-      app: metrics-workshop <-- # should be match
+      app: workshop-app-svc <-- should match
   endpoints:
   - port: http
     interval: 30s
@@ -77,3 +77,4 @@ spec:
 - validate the status is Up
 
 <img width="1586" height="270" alt="image" src="https://github.com/user-attachments/assets/474a53c7-83d6-45b8-b661-2268e10210d4" />
+
