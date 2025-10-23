@@ -8,6 +8,6 @@ spec:
     matchLabels:
       app: metrics-workshop
   endpoints:
-  - port: http # The named port in the Service to scrape
-    interval: 30s # Scrape every 30 seconds
+  - port: http
+    interval: 30s
     path: /metrics
