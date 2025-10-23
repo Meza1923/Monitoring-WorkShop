@@ -19,7 +19,30 @@ helm install my-grafana grafana/grafana -f grafana-values.yaml
 oc get pod -n <ns>
 ```
 
-3. Configure Thanos as our datasource
+3. Create route for grafana
+```
+cd ../
+cat route.yaml
+# route.yaml
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: grafana-<username>
+  namespace: <ns>
+spec:
+  host: <username>.apps.cluster-tkbfg.dynamic.redhatworkshops.io
+  path: /
+  to:
+    kind: Service
+    name: my-grafana-<username>
+    weight: 100
+  port:
+    targetPort: service
+  tls:
+    termination: edge
+```
+
+4. Configure Thanos as our datasource
 
  - login to grafana console
  - go to "Connections" --> "Data sources"
@@ -31,5 +54,5 @@ oc get pod -n <ns>
    Header: Authorization Value: Bearer <token>
  - press "Save & test" and pray
 
-4. Configure Loki as our datasource
+5. Configure Loki as our datasource
    
