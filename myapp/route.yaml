@@ -1,0 +1,16 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: metrics-workshop
+  namespace: test
+spec:
+  host: workshop.apps.cluster-tkbfg.dynamic.redhatworkshops.io
+  path: /
+  to:
+    kind: Service
+    name: metrics-workshop
+    weight: 100
+  port:
+    targetPort: 8000
+  tls:
+    termination: edge

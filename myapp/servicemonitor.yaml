@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: metric-workshop
+  namespace: test
+spec:
+  selector:
+    matchLabels:
+      app: metrics-workshop
+  endpoints:
+  - port: http # The named port in the Service to scrape
+    interval: 30s # Scrape every 30 seconds
+    path: /metrics

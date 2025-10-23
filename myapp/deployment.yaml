@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-exporter-deployment
+  namespace: test
+  labels:
+    app: python-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-exporter
+  template:
+    metadata:
+      labels:
+        app: python-exporter
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '8000'
+    spec:
+      containers:
+      - name: python-exporter
+        image: harbor-harbor.apps.cluster-tkbfg.dynamic.redhatworkshops.io/workshop/my-webapp:latest
+        ports:
+        - containerPort: 8000
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "200m"

@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: metrics-workshop
+  namespace: test
+  labels:
+    app: metrics-workshop
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8000
+  type: ClusterIP
+  selector:
+    app: python-exporter
