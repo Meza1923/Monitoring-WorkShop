@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: workshop-app
+  namespace: check
+  labels:
+    app: workshop-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: workshop-app
+  template:
+    metadata:
+      labels:
+        app: workshop-app
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '8000'
+    spec:
+      containers:
+      - name: workshop-app
+        image: harbor-harbor.apps.cluster-tkbfg.dynamic.redhatworkshops.io/workshop/check:v1
+        ports:
+        - containerPort: 8000
+        resources:
+          limits:
+            memory: "1000Mi"
+            cpu: "200m"

@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: workshop-users-count
+  namespace: <ns>
+  labels:
+    app: workshop-app
+spec:
+  groups:
+    - name: application-users-count
+      rules:
+        - alert: UsersCount
+          annotations:
+            description: |
+              More than 100 users are connected to {{ $labels.container }} in Pod {{ $labels.pod }}
+            summary: 'More than 100 users are connected to {{ $labels.container }} in Pod {{ $labels.pod }} '
+          expr: 'python_app_requests_total{namespace="vmimported-user1"} > 100'
+          for: 5m
+          labels:
+            severity: critical
