@@ -56,3 +56,11 @@ spec:
 
 5. Configure Loki as our datasource
    
+
+6. Building graphes
+
+  - Go to "Dashboards" --> "Add visualization"
+  - Select the datasource you have created
+  - Create dashboard with the next metrics and add whatever you want
+      - cluster:capacity_memory_bytes:sum
+      - 
