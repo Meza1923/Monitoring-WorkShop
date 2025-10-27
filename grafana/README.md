@@ -62,7 +62,7 @@ spec:
   - Go to "Dashboards" --> "Add visualization"
   - Select the datasource you have created
   - Create dashboard with the next PromQL queris and add whatever you want
-      - sum(rate(node_cpu_seconds_total{mode!="idle"}[5m])) - Aggregates CPU usage across all nodes (excluding idle time) to give total core utilization for the cluster.
+      - *sum(rate(node_cpu_seconds_total{mode!="idle"}[5m]))* - Aggregates CPU usage across all nodes (excluding idle time) to give total core utilization for the cluster.
       - node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"} * 100 - Calculates the percentage of available disk space on the root               filesystem (/) for each node.
       - sum(node_memory_MemAvailable_bytes) - Sums the total available memory across all nodes as reported by the Node Exporter
       - sum(kube_pod_status_phase{phase="Pending",namespace="oadp-user10"}) - Counts the total number of pods across the entire cluster that are stuck in the Pending state.
