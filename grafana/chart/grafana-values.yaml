@@ -2,9 +2,12 @@ global:
   imageRegistry: null
   imagePullSecrets: []
 
+rbac:
+  create: false
+
 serviceAccount:
   create: true
-  name:
+  name: grafana-sa
   nameTest:
   labels: {}
   automountServiceAccountToken: false
