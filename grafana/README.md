@@ -2,14 +2,17 @@
 
 <h2>Deploy Grafana</h2>
 
-1. Examine grafana values in garfana-values.yaml file and change the password of the admin username under .adminPassword
+<h3>Configure Grafana Values</h3>
+1. Examine the Grafana configuration values in the grafana-values.yaml file.
+2. Change the password for the admin user under the .adminPassword field.
 
 ```
 cd grafana/chart
 vim grafana-values.yaml
 ```
-   
-2. Install grafana helm repository with our new values
+
+<h3>Install Grafana via Helm</h3>
+3. Install Grafana using your custom values file (replace username>):
 
 ```
 helm repo add grafana https://grafana.github.io/helm-charts
@@ -19,7 +22,9 @@ helm install <username>-grafana grafana/grafana -f grafana-values.yaml
 oc get pod -n <ns>
 ```
 
-3. Create route for grafana
+<h3>Create Grafana Route (OpenShift)</h3>
+4. Apply the route
+
 ```
 cd ../
 cat route.yaml
@@ -30,24 +35,28 @@ metadata:
   name: grafana-<username>
   namespace: <ns>
 spec:
-  host: <username>.apps.cluster-tkbfg.dynamic.redhatworkshops.io
+  host: <username>-workshop.apps.cluster-tkbfg.dynamic.redhatworkshops.io
   path: /
   to:
     kind: Service
-    name: my-grafana-<username>
+    name: workshop-app
     weight: 100
   port:
     targetPort: service
   tls:
     termination: edge
+
+oc apply -f route.yaml
 ```
 
-4. Configure Thanos as our datasource
+<h3>Configure Thanos as a Data Source</h3>
+5. Create a service account token for Thanos authentication
 
- - Create token for authenticate Thanos
 ```
    oc create token grafana-sa --duration=31556926s
 ```
+
+6. Add Thanos in Grafana
  - Login to grafana console
  - Go to "Connections" --> "Data sources"
  - On the left press on "Add new data source"
@@ -59,7 +68,8 @@ spec:
  - Press "Save & test" and pray
 
 
-5. Configure Loki as our datasource
+<h3>Configure Loki as a Data Source</h3>
+6. Configure Loki as Data source
 
  - Login to grafana console
  - Go to "Connections" --> "Data sources"
@@ -71,11 +81,11 @@ spec:
  - Press "Save & test" and pray
 
 
-6. Building graphes
+7. Building Dashboards
 
   - Go to "Dashboards" --> "Add visualization"
-  - Select the datasource you have created
-  - Create dashboard with the next PromQL queris and add whatever you want
+  - Select the Thanos data source you have created
+  - Create a dashboard using the following PromQL queries and add any other visualizations you want
     
       - **sum(rate(node_cpu_seconds_total{mode!="idle"}[5m]))** - Aggregates CPU usage across all nodes (excluding idle time) to give total core utilization for the cluster.
       - **node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"} * 100** - Calculates the percentage of available disk space on the root           filesystem (/) for each node.
