@@ -2,9 +2,9 @@ kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
   name: metrics-workshop
-  namespace: test
+  namespace: <ns>
 spec:
-  host: workshop.apps.cluster-tkbfg.dynamic.redhatworkshops.io
+  host: <username>-workshop.apps.cluster-tkbfg.dynamic.redhatworkshops.io
   path: /
   to:
     kind: Service

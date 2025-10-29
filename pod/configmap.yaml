@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: list-of-projects
+  namespace: test
+data:
+  namespaces.txt: |
+    vmimported-user1

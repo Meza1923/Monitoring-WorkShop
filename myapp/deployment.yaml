@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: workshop-app
-  namespace: <ns>
+  namespace: vmimported-user2
   labels:
     app: workshop-app
 spec:
@@ -14,12 +14,10 @@ spec:
     metadata:
       labels:
         app: workshop-app
-        prometheus.io/scrape: 'true'
-        prometheus.io/port: '8000'
     spec:
       containers:
       - name: workshop-app
-        image: harbor-harbor.apps.cluster-tkbfg.dynamic.redhatworkshops.io/workshop/<username>-my-app:v1
+        image: harbor-harbor.apps.cluster-tkbfg.dynamic.redhatworkshops.io/workshop/user2-my-app:v1
         ports:
         - containerPort: 8000
         resources:

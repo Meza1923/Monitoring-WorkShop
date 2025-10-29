@@ -164,13 +164,13 @@ createConfigmap: true
 
 # Extra configmaps to mount in grafana pods
 # Values are templated.
-extraConfigmapMounts:
-  - name: certs-configmap
-    mountPath: /etc/grafana/ssl/
-    subPath: certificates.crt # (optional)
-    configMap: certs-configmap
-    readOnly: true
-    optional: false
+extraConfigmapMounts: []
+  # - name: certs-configmap
+  #   mountPath: /etc/grafana/ssl/
+  #   subPath: certificates.crt # (optional)
+  #   configMap: certs-configmap
+  #   readOnly: true
+  #   optional: false
 
 
 extraEmptyDirMounts: []

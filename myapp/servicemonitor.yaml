@@ -1,12 +1,12 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: metric-workshop
-  namespace: test
+  name: workshop-app
+  namespace: <ns>
 spec:
   selector:
     matchLabels:
-      app: metrics-workshop
+      app: workshop-app-svc
   endpoints:
   - port: http
     interval: 30s

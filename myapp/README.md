@@ -78,3 +78,10 @@ spec:
 
 <img width="1586" height="270" alt="image" src="https://github.com/user-attachments/assets/474a53c7-83d6-45b8-b661-2268e10210d4" />
 
+5. Create Prometheus Role in order to get notify when something went wrong
+   In this case the alert will be firing if the number of the users that connected to the application has cross 100.
+
+- Create PrometheusRole
+```
+oc create -f prometheusrole.yaml
+```

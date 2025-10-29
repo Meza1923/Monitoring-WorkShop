@@ -14,7 +14,7 @@ vim grafana-values.yaml
 ```
 helm repo add grafana https://grafana.github.io/helm-charts
 
-helm install my-grafana grafana/grafana -f grafana-values.yaml
+helm install <username>-grafana grafana/grafana -f grafana-values.yaml
 
 oc get pod -n <ns>
 ```
@@ -44,6 +44,10 @@ spec:
 
 4. Configure Thanos as our datasource
 
+ - Create token for authenticate Thanos
+```
+   oc create token grafana-sa --duration=31556926s
+```
  - Login to grafana console
  - Go to "Connections" --> "Data sources"
  - On the left press on "Add new data source"
