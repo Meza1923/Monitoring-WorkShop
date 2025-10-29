@@ -5,13 +5,14 @@
 
 1. Our examaple python code is in metrics_exporter.py
 
-Components:
+Application Components
+Our example Python code is in metrics_exporter.py. The relevant files are:
 
-metrics_exporter.py - contain the code of our example application
-requirements.txt    - contain list of our python moudls
-Containerfile       - our instructions file for the image
+metrics_exporter.py: Contains the code for our example application.
+requirements.txt: Lists the required Python modules/dependencies.
+Containerfile: The instructions file used to build the container image.
 
-1. Build the image and push it to the registry
+1. Build the image and push it to the registry. (Make sure to replace the registry URL and <username> placeholder)
 
 ```
 cd image/
@@ -20,7 +21,7 @@ podman tag my-app:v1 harbor-harbor.apps.cluster-tkbfg.dynamic.redhatworkshops.io
 podman push harbor-harbor.apps.cluster-tkbfg.dynamic.redhatworkshops.io/workshop/<username>-my-app:v1
 ```
 
-2. Deploy our deployment, svc and route
+2. Deploy the application using the Deployment, Service (SVC), and Route definitions.
 
 ```
 cd ../
@@ -29,7 +30,9 @@ oc apply -f service.yaml
 oc apply -f route.yaml
 ```
 
-3. Now we will add ServiceMonitor object in order to allow Prometheus to monitor my application
+3. Create the ServiceMonitor
+ - Now, we will add a ServiceMonitor object to allow Prometheus to scrape metrics from our application.
+ - Examine the service.yaml and servicemonitor.yaml definitions:
    
 ```
 cat service.yaml
@@ -69,19 +72,22 @@ spec:
     path: /metrics
 ```
 
-4. check if our service is being monitor
+4. Check if our application's service is being monitored by Prometheus
 
-- login to openshift console
-- go to Observe --> Targets
-- filter source to only User
-- validate the status is Up
+
+- Log in to the OpenShift Console
+- Go to Observe --> Targets
+- Filter the Source to "User"
+- Validate that the target status for workshop-app is "Up".
 
 <img width="1586" height="270" alt="image" src="https://github.com/user-attachments/assets/474a53c7-83d6-45b8-b661-2268e10210d4" />
 
-5. Create Prometheus Role in order to get notify when something went wrong
-   In this case the alert will be firing if the number of the users that connected to the application has cross 100.
+5. Finally, we will create a PrometheusRule object to define an alert.
 
-- Create PrometheusRole
+- In this case, the alert will fire if the number of users connected to the application exceeds 100.
+
+- Create the PrometheusRule
 ```
 oc create -f prometheusrole.yaml
 ```
+
