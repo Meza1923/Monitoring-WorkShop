@@ -69,7 +69,7 @@ oc apply -f route.yaml
 
 
 <h3>Configure Loki as a Data Source</h3>
-6. Configure Loki as Data source
+7. Configure Loki as Data source
 
  - Login to grafana console
  - Go to "Connections" --> "Data sources"
@@ -81,7 +81,7 @@ oc apply -f route.yaml
  - Press "Save & test" and pray
 
 
-7. Building Dashboards
+8. Building Dashboards
 
   - Go to "Dashboards" --> "Add visualization"
   - Select the Thanos data source you have created
