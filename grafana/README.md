@@ -39,7 +39,7 @@ spec:
   path: /
   to:
     kind: Service
-    name: workshop-app
+    name: my-grafana-<username>
     weight: 100
   port:
     targetPort: service
