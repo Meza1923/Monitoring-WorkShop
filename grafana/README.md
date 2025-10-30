@@ -64,7 +64,7 @@ oc apply -f route.yaml
  - Enter "https://thanos-querier.openshift-monitoring.svc.cluster.local:9091" in url
  - Mark "Skip TLS certificate validation"
  - Add HTTP headers
-   Header: Authorization Value: Bearer <token>
+   Header: Authorization Value: Bearer TOKEN
  - Press "Save & test" and pray
 
 
@@ -77,7 +77,7 @@ oc apply -f route.yaml
  - Choose Loki
  - Enter "https://logging-loki-gateway-http.openshift-logging.svc.cluster.local:8080/api/logs/v1/infrastructure/" in url
  - Add HTTP headers
-   Header: Authorization Value: Bearer <token>
+   Header: Authorization Value: Bearer TOKEN
  - Press "Save & test" and pray
 
 
